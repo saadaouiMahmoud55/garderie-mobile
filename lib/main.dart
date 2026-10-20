@@ -54,9 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               'assets/images/garderie.jpg',
               height: 250,
             ),
-
             const SizedBox(height: 20),
-
             const Text(
               'Ma Garderie',
               style: TextStyle(
@@ -70,6 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
 final List<Map<String, String>> activites = [
   {
     "titre": "Dessin et coloriage",
@@ -97,6 +96,7 @@ final List<Map<String, String>> activites = [
     "icone": "⚽"
   }
 ];
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -109,47 +109,75 @@ class HomePage extends StatelessWidget {
 
       drawer: Drawer(
         child: ListView(
-          children: const [
-            DrawerHeader(
-              child: Text("Menu"),
+          children: [
+            const DrawerHeader(
+              child: Text(
+                "Menu",
+                style: TextStyle(fontSize: 24),
+              ),
             ),
+
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Accueil"),
+              leading: const Icon(Icons.home),
+              title: const Text("Accueil"),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
+
             ListTile(
-              leading: Icon(Icons.child_care),
-              title: Text("Activités"),
+              leading: const Icon(Icons.child_care),
+              title: const Text("Activités"),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
+
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text("À propos"),
+              leading: const Icon(Icons.info),
+              title: const Text("À propos"),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
       ),
 
-    body: ListView.builder(
-  itemCount: activites.length,
-  itemBuilder: (context, index) {
-    final activite = activites[index];
+      body: ListView.builder(
+        itemCount: activites.length,
+        itemBuilder: (context, index) {
+          final activite = activites[index];
 
-    return Card(
-      margin: const EdgeInsets.all(10),
-      child: ListTile(
-        leading: Text(
-          activite["icone"]!,
-          style: const TextStyle(fontSize: 28),
-        ),
-        title: Text(activite["titre"]!),
-        subtitle: Text(activite["description"]!),
+          return Card(
+            margin: const EdgeInsets.all(10),
+            child: ListTile(
+              leading: Text(
+                activite["icone"]!,
+                style: const TextStyle(fontSize: 28),
+              ),
+              title: Text(activite["titre"]!),
+              subtitle: Text(activite["description"]!),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(activite["titre"]!),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
-    );
-  },
-),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Nouvelle activité"),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
