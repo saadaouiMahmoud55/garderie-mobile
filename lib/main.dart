@@ -76,12 +76,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Accueil',
-          style: TextStyle(fontSize: 25),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ma Garderie"),
+      ),
+
+      drawer: Drawer(
+        child: ListView(
+          children: const [
+            DrawerHeader(
+              child: Text("Menu"),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Accueil"),
+            ),
+            ListTile(
+              leading: Icon(Icons.child_care),
+              title: Text("Activités"),
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text("À propos"),
+            ),
+          ],
         ),
+      ),
+
+      body: const Center(
+        child: Text(
+          "Liste des activités",
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
